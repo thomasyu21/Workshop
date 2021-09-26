@@ -1,3 +1,8 @@
+#Thomas Yu
+#SoftDev
+#Print A SoftDev Student's Name
+#2021-9-21
+
 import random
 
 #global variables
