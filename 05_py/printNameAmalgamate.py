@@ -9,23 +9,24 @@ Summary:
     - Read in names from a text file instead of having list created with names
     - Allows the lists to be changed easily
     - One text file per period
-    - This had now been changed to precoded lists in the form of a dictionary
+    - This had now been changed to precoded lists stored in a dictionary
 - Any exceptions to watch out for
     - The file not existing in the directory
     - The file being empty
     - Solve these issues with try and except
     - Would have to print outputs separately (to check for each list individually)
-    - Exceptions no longer are an issue (aren't reading lines from text file)
+    - Exceptions no longer are an issue (aren't reading lines from a text file)
 - How to choose the name
-    - randint to generate random index within bounds
+    - Shuffle the list or randint to generate random index within bounds
 Discoveries:
 - Try catch blocks in python are try: except:
 - without line.strip() it will keep the \n with the name, creating a new line in the output
 - Python dictionaries and how to access the keys and values within the dictionary
 Questions:
-- How would we make it work for and infinite number of periods?
+- How would we make it work for an infinite number of periods?
 Comments:
-- 
+- Could still possibly use shuffle as each key in the dictionary is still a list.
+- However randint would be more effective as the list grows in size. 
 '''
 
 import random
