@@ -31,7 +31,6 @@
 * [This may be useful.](https://guides.github.com/features/mastering-markdown/)
 
 ### Weighted Randomized Selection
-* Weighted Randomized Selection
 * The percentages add up to a total of 99.8, so we generated a random float between 0 (inclusive) and 99.8 (exclusive)
 * By creating intervals, we created sets of values that each refer to a different job. When the randomly generated float is within the interval, it will return the corresponding job.
 * By changing the size of these intervals, we can alter the probability of that job being returned.
