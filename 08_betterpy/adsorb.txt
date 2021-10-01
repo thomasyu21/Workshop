@@ -1,0 +1,13 @@
+Team Pandas
+SoftDev
+K08 - Workshop Visits
+2021-09-30
+
+- What is the best implementation for weighted randomized selection?
+- Many groups used DictReader, but many also did not
+  - Some groups only used csv.reader
+  - One group read in the data using the url of the github percentages
+  - Others read in the data and separated the Job Class from the Percentages manually.
+- Some groups used random.choices to do the weighted randomized selection
+  - How does random.choices work?
+- It doesn't matter if you multiply the percentages by 10 and used randint or if you just used random
