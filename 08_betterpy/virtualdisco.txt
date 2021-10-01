@@ -1,10 +1,10 @@
-Team Pandas
+Team Pandas (Liesel Wong, Thomas Yu, Mark Zhu)
 SoftDev
 K08 - Virtual Environments
 2021-09-30
 
 Observations
-- $ python3 -m venv ~/myherozero -> the command creates a directory with the name myherozero in the default directory.
+- $ python3 -m venv ~/myherozero -> the command creates a virtual environemnt with the name myherozero as the directory.
 - There are 3 folders (Include, Lib, and Scripts) and a config file
 - The Include folder is empty. What is this folder for?
 - The Lib folder contains site-packages
@@ -12,11 +12,16 @@ Observations
 - Scripts Folder
   - The folder that actually has Python
   - Used to activate and deactivate the virtual environment
+- python3 -> only entering python3 in your terminal opens the python environment, where you can run piece of python code.
+- python3 -m -> this command allows python to find a module or a python file and run it from the command line.
 
-https://docs.python.org/3/library/venv.html
 - $ myherozero/Scripts/activate -> activates the virtual environment
 - $ deactivate -> closes the virtual environment
 - Virtual environments have their own directories
   - Can have its own independent set of installed Python packages
   - Can have virtual enviroments of different Python versions
   - Allows you to run python applications that may need different versions of python.
+
+https://docs.python.org/3/library/venv.html
+https://realpython.com/run-python-scripts/#:~:text=To%20run%20Python%20scripts%20with,python3%20hello.py%20Hello%20World!
+https://docs.python.org/3/using/cmdline.html
