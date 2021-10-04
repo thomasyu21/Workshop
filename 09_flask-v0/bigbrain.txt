@@ -1,0 +1,39 @@
+Team Undecided: Raymond Yeung and Pengu, Thomas Yu and Perry
+SoftDev
+K09 -- Basic Exploration into Flask
+2021-10-03
+
+Q0:
+- This is similar to using a constructor to initialize and object in Java
+- Java -> objectName = objectType(parameterForConstructor)
+- This would mean that we are creating a Flask object that is named app.
+
+Q1:
+- @app.route("/") contains the word route, therefore it may be related to the path of the app
+- This could be the url which the app is related to
+
+Q2:
+- This will print to the terminal when you run the app
+* What was printed:
+  * Serving Flask app 'app' (lazy loading)
+  * Environment: production
+    WARNING: This is a development server. Do not use it in a production deployment.
+    Use a production WSGI server instead.
+  * Debug mode: off
+  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit) -> This contains the url of the website
+    * The url is a blank website with the words "No hablo queso!"
+    * url is the same despite being on different machines
+* After quitting the app/program, __main__ is printed (think this was print(__name__) )
+
+Q3:
+- print(__name__) will print whatever __name__ is set to by default
+* By default __name__ is set to __main__
+- "No hablo queso!" will appear at the end destination of the route, which would be a website that is created when the program is run.
+
+Q4:
+- We have seen similar constructs in Java
+- When running a function from another class or object
+- className.function(parameters) and objectName.function(parameters)
+
+Notables:
+* Could not use python3 to run app.py
