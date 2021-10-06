@@ -1,0 +1,17 @@
+Trio Of Success: Raymond Yeung, Thomas Yu, Annabel Zhang
+K11 -- Flask and Static Files
+SoftDev
+2021-10-06
+
+Observations
+- Nowhere in app.py does it reference foo, foo.html, or the static folder
+- When accessing the web page from the link given in the terminal it will function the exact same as v4 from K10
+- URLs: http://localhost:5000/static/foo and http://localhost:5000/static/foo.html
+  - Allows you to access the file even though app.py doesn't reference it
+  - After the port (5000) is the path to the file from app.py's root directory
+
+Predictions
+- foo.html will work fine as that is what the webpage uses
+  * foo.html did work properly
+- foo will break as the plaintext file won't display properly
+  * Accessing foo opens a prompt to download the text file
