@@ -1,0 +1,29 @@
+Trio Of Success: Raymond Yeung, Thomas Yu, Annabel Zhang
+K12 -- Templates in Flask
+SoftDev
+2021-10-07
+
+Q0: If render_template is removed, there would be nothing to refer to when returning render_template()
+* With Debugger mode on:
+* The webpage shows NameError
+* Shows the traceback to where the error occurs in the code
+* With Debugger mode off:
+* Internal Server Error
+* Either the server is overloaded or there is an error in the application.
+
+Q1: https://localhost:5000/template/my_foist_template
+* This was incorrect
+* http://127.0.0.1:5000/my_foist_template is the actual url
+* app.route() replaces the path of the file in the url, not just the file itself
+
+Q2: 'model_tmplt.html' refers to the file, foo variable replaces the title with the string.
+- Expected Behavior:
+- Website title becomes fooooo
+* This can be observed in the name of the tab itself, not on the webpage
+- The body would return the elements in coll with a newline/break after each element
+* Did in fact return the list with an element per line
+
+Things to Note:
+- http://127.0.0.1:5000/ still shows the webpage with "No hablo queso!"
+- What is the specific syntax for Jinja2
+	- What exactly do % and {} represent
