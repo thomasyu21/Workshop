@@ -1,6 +1,7 @@
-# Clyde 'Thluffy' Sinclair
+# Trio Of Success: Raymond Yeung, Thomas Yu, Annabel Zhang
+# K12 -- Templates in Flask
 # SoftDev
-# Oct 2021
+# 2021-10-07
 
 from flask import Flask, render_template #Q0: What happens if you remove render_template from this line?
 app = Flask(__name__)
