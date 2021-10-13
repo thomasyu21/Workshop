@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+  Team PPS: Kevin Cao (Pipi), Thomas Yu (Perry), Han Zhang(Sirap)
+  SoftDev
+  K13: Template for Success
+  2021-10-8
+ -->
+
+<html>
+
+  <head>
+    <title> {{ title }} </title>
+  </head>
+
+  <body>
+      <h2> {{ heading }}</h2>
+      <h3> {{ occupation }}</h3>
+      <table border='1'>
+          {% for key, value in occupations.items() %}
+            <tr>
+                <td>
+                    {{ key }}
+                </td>
+                <td>
+                    {{ value }}
+                </td>
+            </tr>
+          {% endfor %}
+      </table>
+  </body>
+
+</html>

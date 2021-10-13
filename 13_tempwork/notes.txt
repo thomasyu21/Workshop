@@ -1,0 +1,18 @@
+Team PPS: Kevin Cao (Pipi), Thomas Yu (Perry), Han Zhang(Sirap)
+SoftDev
+K13: Template for Success
+2021-10-12
+
+Flask
+* Can have multiple routes in one app.
+* Good to have a home page.
+  * If there is no default route ("/") the central webpage returns Not Found.
+* Can iterate through a dictionary in the template with Jinja2.
+
+Egoless Programming
+* Working with others is beneficial.
+* Don't be afraid to have others look at your code for errors. Don't look at code reviews as attacks.
+* Outside eyes are useful for looking for bugs.
+  * Interesting that we get used to our coding styles which causes us to skip over clear bugs and mistakes.
+* Reading somebody else's code could benefit your own.
+  * Learn where mistakes are made. Could be the same issues for your own code.
