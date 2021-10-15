@@ -1,0 +1,31 @@
+Team Berd: Austin Ngan (), Thomas Yu (Perry), Mark Zhu (Bob the Third Jr)
+SoftDev
+K14: Form and Function
+2021-10-14
+
+Observations before running:
+- disp_loginpage() starts by printing out three new lines, then a line of text.
+- Then, it prints app, but what does printing the app do? Will it print the name of the app object that was declared?
+- What is request? How is it being printed in the terminal? Can it be printed even if it is not declared?
+- App prints request.args, but there are no arguments present? (unless there are default arguments)
+- Prints request.headers, but we don't know what request.headers is.
+- Then, disp_loginpage() ends by displaying the login template.
+
+authenticate():
+- Has the exact same code as disp_loginpage(), except that it returns "Waaaa hooo HAAH".
+
+login.html:
+- Where in the code does it take us to another page? How is this done?
+- Username seems to be the argument in request.args.
+- After submit, the html file triggers authenticate(), taking you to a page returning "Waaaa hooo HAAH".
+
+After running:
+disp_loginpage():
+- print(app) returns <Flask 'app'>
+- print(request) returns the address to the webpage.
+- print(request.args) returns an empty dictionary
+- print(request.headers) returns a lot of info from the user (such as the browser that is accessing the webpage).
+
+authenticate():
+- The address changes to include the new route, as well as information submitted from the form on the previous page.
+- request.args has new information added to the dictionary, which includes the username and sub1.
