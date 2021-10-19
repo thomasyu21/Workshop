@@ -1,0 +1,23 @@
+Team Berd: Austin Ngan (Gerald), Thomas Yu (Perry), Mark Zhu (Bob the Third Jr)
+SoftDev
+K15: Sessions Greetings
+2021-10-18
+
+Dev Console:
+Favicon Error:
+When requesting data, the FireFox console returns a favicon exception
+Says Favicon at http://127.0.0.1:5000/favicon.ico failed to load because it was not found
+Then it says Unchecked lastError value -> could not establish connection.
+These errors can be ignored as the webpage still works as intended.
+Drop down for GET http://127.0.0.1:5000/favicon.ico:
+Says status is 404 NOT FOUND
+No cookies or request payload
+Has information about response and request headers.
+- Content length, type, date, server (Werkzeug), host, etc.
+
+TO DO:
+make new templates depending on if username/password is incorrect
+finish conditional checks
+probably need to use request.cookies.get('username") to establish a session if the user is logged in/has logged in previously
+comments!
+note more dev console stuff
