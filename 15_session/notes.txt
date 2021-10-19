@@ -7,8 +7,14 @@ Dev Console:
 Favicon Error:
 When requesting data, the FireFox console returns a favicon exception
 Says Favicon at http://127.0.0.1:5000/favicon.ico failed to load because it was not found
+
 Then it says Unchecked lastError value -> could not establish connection.
 These errors can be ignored as the webpage still works as intended.
+
+Warning:
+LoginRecipes: getRecipes: falling back to a synchronous message for: http://127.0.0.1:5000
+Shows up in the console whenever the form is submitted
+
 Drop down for GET http://127.0.0.1:5000/favicon.ico:
 Says status is 404 NOT FOUND
 No cookies or request payload
