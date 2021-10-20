@@ -3,7 +3,7 @@
 Team Berd: Austin Ngan (Gerald), Thomas Yu (Perry), Mark Zhu (Bob the Third Jr)
 SoftDev
 K15: Sessions Greetings
-2021-10-18
+2021-10-19
      simple demo of HTML forms via Flask
 
      trioTASK:
@@ -15,29 +15,33 @@ K15: Sessions Greetings
  -->
 
 
-<html>
+ <html>
 
-  <head>
-    <title> LOGIN PAGE </title>
-  </head>
+   <head>
+     <title> LOGIN PAGE </title>
+   </head>
 
-  <body>
-    <h1>
-      Welcome, Travelers of the Intertoobz!
-    </h1>
+   <body>
+     <h1>
+       Team Berd: Austin Ngan (Gerald), Thomas Yu (Perry), Mark Zhu (Bob the Third Jr)
+       <br></br>
+       Welcome, Travelers of the Intertoobz!
+       <br></br>
+       {{warning}}
+     </h1>
 
 
-    <h3>
-      Enter your username below to proceed.
-    </h3>
-    <form action="/auth">
-      Username: <input type="text" name="username">
-      <br></br>
-      Password: <input type="text" name="password">
-      <br></br>
-      <input type="submit" name="sub1">
-    </form>
-    <br>
-  </body>
+     <h3>
+       Enter your username below to proceed.
+     </h3>
+     <form action="/auth">
+       Username: <input type="text" name="username">
+       <br></br>
+       Password: <input type="text" name="password">
+       <br></br>
+       <input type="submit" name="sub1">
+     </form>
+     <br>
+   </body>
 
-</html>
+ </html>

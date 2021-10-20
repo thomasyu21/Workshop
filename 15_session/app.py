@@ -12,16 +12,15 @@ from flask import session           #facilitate session
 #from flask import Flask, render_template, request
 
 app = Flask(__name__)    #create Flask object
+app.secret_key="asdf123" #secret key for flask to work
 
 teamBerd = "Team Berd: Austin Ngan, Thomas Yu, Mark Zhu" #TNPG + roster for both landing and response pages
 username = "Username"
 password = "Password123"
 
-
-2021-10-14
 @app.route("/") #, methods=['GET', 'POST'])
 def disp_loginpage():
-    '''For the landing page where the user will login with a username'''
+    '''For the landing page where the user will login with a username. If there is already a session, the repsonse page will be generated'''
     #print("\n\n\n")
     #print("***DIAG: this Flask obj ***")
     #print(app)
@@ -33,7 +32,11 @@ def disp_loginpage():
     #print(request.args['username'])
     #print("***DIAG: request.headers ***")
     #print(request.headers)
-    return render_template( 'login.html' , heading = teamBerd) #Only thing that is added to login page is the heading
+    if (session['u'] == username):
+        greet = "Hullo humon, Berd appreciates your visit. Enjoy your stay. "
+        return render_template('response.html', heading = teamBerd, greeting = greet, username = session['u'], password = password, request = request.method)
+    else:
+        return render_template( 'login.html' , heading = teamBerd) #Only thing that is added to login page is the heading
 
 
 @app.route("/auth")#	, methods=['GET', 'POST'])
@@ -63,8 +66,14 @@ def authenticate():
         greet += "Error: Password is incorrect. "
     if (tempUser == username and tempPass == password):
         greet += "Hullo humon, Berd appreciates your visit. Enjoy your stay. "
+        session['u'] = tempUser
     return render_template('response.html', heading = teamBerd, greeting = greet, username = tempUser, password = tempPass, request = request.method)  #uses response template to create the webpage
 
+@app.route("/logOut")
+def logOut():
+    '''For when the user logs out of the session'''
+    session.pop('u',None)
+    return render_template('login.html',warning="You have successfully logged out.")
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
