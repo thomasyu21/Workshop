@@ -46,4 +46,5 @@ Don't really understand what app.secret_key does, but without it says the sessio
 Error Handling:
 Used conditionals to determine if the username and password are correct.
 Also used conditionals to check if there is a session.
-Didn't use any other exception handling. (Don't know if webpage is guaranteed to not fail)
+Used try and except block to make sure nothing would break during authenticate.
+- https://docs.python.org/3/tutorial/errors.html

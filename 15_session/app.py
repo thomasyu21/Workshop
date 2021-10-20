@@ -54,21 +54,24 @@ def authenticate():
     #print(request.args['username'])
     #print("***DIAG: request.headers ***")
     #print(request.headers)
-    greet = "" #Greeting to be displayed on the response page
-    if (request.method == 'GET'): #getting user and pass for GET
-        tempUser = request.args['username']
-        tempPass = request.args['password']
-    elif (request.method == 'POST'): #getting user and pass for POST
-        tempUser = request.form['username']
-        tempPass = request.form['password']
-    if (tempUser != username): #wrong username
-        greet += "Error: Username is incorrect. "
-    if (tempPass != password): #wrong password
-        greet += "Error: Password is incorrect. "
-    if (tempUser == username and tempPass == password): #correct username and password
-        greet += "Hullo humon, Berd appreciates your visit. Enjoy your stay. "
-        session['user'] = tempUser #creates session with username
-    return render_template('response.html', heading = teamBerd, greeting = greet, username = tempUser, password = tempPass, request = request.method)  #uses response template to create the webpage
+    try:
+        greet = "" #Greeting to be displayed on the response page
+        if (request.method == 'GET'): #getting user and pass for GET
+            tempUser = request.args['username']
+            tempPass = request.args['password']
+        elif (request.method == 'POST'): #getting user and pass for POST
+            tempUser = request.form['username']
+            tempPass = request.form['password']
+        if (tempUser != username): #wrong username
+            greet += "Error: Username is incorrect. "
+        if (tempPass != password): #wrong password
+            greet += "Error: Password is incorrect. "
+        if (tempUser == username and tempPass == password): #correct username and password
+            greet += "Hullo humon, Berd appreciates your visit. Enjoy your stay. "
+            session['user'] = tempUser #creates session with username
+        return render_template('response.html', heading = teamBerd, greeting = greet, username = tempUser, password = tempPass, request = request.method)  #uses response template to create the webpage
+    except:
+        return render_template('login.html', warning = "Something Went Wrong.")
 
 @app.route("/logOut")
 def logOut():
