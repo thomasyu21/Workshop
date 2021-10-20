@@ -61,7 +61,7 @@ def authenticate():
         greet += "Error: Username is incorrect. "
     if (tempPass != password): #wrong password
         greet += "Error: Password is incorrect. "
-    if (tempUser == username and Pass == password):
+    if (tempUser == username and tempPass == password):
         greet += "Hullo humon, Berd appreciates your visit. Enjoy your stay. "
     return render_template('response.html', heading = teamBerd, greeting = greet, username = tempUser, password = tempPass, request = request.method)  #uses response template to create the webpage
 
