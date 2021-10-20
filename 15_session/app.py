@@ -7,12 +7,13 @@ from flask import Flask             #facilitate flask webserving
 from flask import render_template   #facilitate jinja templating
 from flask import request           #facilitate form submission
 from flask import session           #facilitate session
+import os                           #to create the secret key
 
 #the conventional way:
 #from flask import Flask, render_template, request
 
 app = Flask(__name__)    #create Flask object
-app.secret_key="asdf123" #secret key for flask to work
+app.secret_key = os.urandom(32) #secret key for flask to work
 
 teamBerd = "Team Berd: Austin Ngan, Thomas Yu, Mark Zhu" #TNPG + roster for both landing and response pages
 username = "Username"
