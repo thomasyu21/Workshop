@@ -11,6 +11,10 @@ Says Favicon at http://127.0.0.1:5000/favicon.ico failed to load because it was 
 Then it says Unchecked lastError value -> could not establish connection.
 These errors can be ignored as the webpage still works as intended.
 
+TypeError: gRecipeManager is null
+- What is gRecipeManager?
+- Doesn't stop the webpage from working/
+
 Warning:
 LoginRecipes: getRecipes: falling back to a synchronous message for: http://127.0.0.1:5000
 Shows up in the console whenever the form is submitted
@@ -21,9 +25,25 @@ No cookies or request payload
 Has information about response and request headers.
 - Content length, type, date, server (Werkzeug), host, etc.
 
-TO DO:
-make new templates depending on if username/password is incorrect
-finish conditional checks
-probably need to use request.cookies.get('username") to establish a session if the user is logged in/has logged in previously
-comments!
-note more dev console stuff
+Cookies:
+When there is no session, the drop down for GET <url> has no cookies or requests
+Upon successful login: Response Cookies
+- httpOnly: true
+- path: "/"
+- value = <Very Long String>
+- request is still empty
+When user accesses session by going to the login page: Request Cookies
+- session = <Very Long String From Before>
+When the user logs out of the session: Both Response and Request Cookies
+- expires: "1970-01-01T00:00:00.000Z"
+- value is now ""
+Session value changes every time the session is created
+The expiration value remains the same
+Beginning of value seems to be the same for every session: "eyJ1c2VyIjoiVXNlcm5hbWUifQ.YW"
+- The rest of the string changes (alphanumeric except for one '.')
+Don't really understand what app.secret_key does, but without it says the session was unavailable due the lack of a secret key.
+
+Error Handling:
+Used conditionals to determine if the username and password are correct.
+Also used conditionals to check if there is a session.
+Didn't use any other exception handling. (Don't know if webpage is guaranteed to not fail)
