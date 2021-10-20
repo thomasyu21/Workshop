@@ -32,11 +32,11 @@ def disp_loginpage():
     #print(request.args['username'])
     #print("***DIAG: request.headers ***")
     #print(request.headers)
-    if 'u' in session and session['u'] == username:
+    if 'user' in session: #if there is a user in session takes them to a response page
         greet = "Hullo humon, Berd appreciates your visit. Enjoy your stay. "
-        return render_template('response.html', heading = teamBerd, greeting = greet, username = session['u'], password = password, request = request.method)
+        return render_template('response.html', heading = teamBerd, greeting = greet, username = session['user'], password = password, request = request.method)
     else:
-        return render_template( 'login.html' , heading = teamBerd) #Only thing that is added to login page is the heading
+        return render_template( 'login.html') #If no user in session takes the user to the login page
 
 
 @app.route("/auth")#	, methods=['GET', 'POST'])
@@ -64,16 +64,19 @@ def authenticate():
         greet += "Error: Username is incorrect. "
     if (tempPass != password): #wrong password
         greet += "Error: Password is incorrect. "
-    if (tempUser == username and tempPass == password):
+    if (tempUser == username and tempPass == password): #correct username and password
         greet += "Hullo humon, Berd appreciates your visit. Enjoy your stay. "
-        session['u'] = tempUser
+        session['user'] = tempUser #creates session with username
     return render_template('response.html', heading = teamBerd, greeting = greet, username = tempUser, password = tempPass, request = request.method)  #uses response template to create the webpage
 
 @app.route("/logOut")
 def logOut():
     '''For when the user logs out of the session'''
-    session.pop('u',None)
-    return render_template('login.html',warning="You have successfully logged out.")
+    if 'user' in session: #if user in session remove session and take user back to login page with extra text
+        session.pop('user',None)
+        return render_template('login.html',warning="You have successfully logged out.")
+    else: #no user in session just takes the user back to the login page with no extra text
+        return render_template('login.html')
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified
