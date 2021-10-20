@@ -52,18 +52,18 @@ def authenticate():
     #print(request.headers)
     greet = "" #Greeting to be displayed on the response page
     if (request.method == 'GET'): #getting user and pass for GET
-        User = request.args['username']
-        Pass = request.args['password']
+        tempUser = request.args['username']
+        tempPass = request.args['password']
     elif (request.method == 'POST'): #getting user and pass for POST
-        User = request.form['username']
-        Pass = request.form['password']
-    if (User != username): #wrong username
+        tempUser = request.form['username']
+        tempPass = request.form['password']
+    if (tempUser != username): #wrong username
         greet += "Error: Username is incorrect. "
-    if (Pass != password): #wrong password
+    if (tempPass != password): #wrong password
         greet += "Error: Password is incorrect. "
-    if (User == username and Pass == password):
+    if (tempUser == username and Pass == password):
         greet += "Hullo humon, Berd appreciates your visit. Enjoy your stay. "
-    return render_template('response.html', heading = teamBerd, greeting = greet, username = User, password = Pass, request = request.method)  #uses response template to create the webpage
+    return render_template('response.html', heading = teamBerd, greeting = greet, username = tempUser, password = tempPass, request = request.method)  #uses response template to create the webpage
 
 
 if __name__ == "__main__": #false if this file imported as module
