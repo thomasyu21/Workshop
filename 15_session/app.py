@@ -32,7 +32,7 @@ def disp_loginpage():
     #print(request.args['username'])
     #print("***DIAG: request.headers ***")
     #print(request.headers)
-    if (session['u'] == username):
+    if 'u' in session and session['u'] == username:
         greet = "Hullo humon, Berd appreciates your visit. Enjoy your stay. "
         return render_template('response.html', heading = teamBerd, greeting = greet, username = session['u'], password = password, request = request.method)
     else:
