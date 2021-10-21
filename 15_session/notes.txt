@@ -48,8 +48,3 @@ Used conditionals to determine if the username and password are correct.
 Also used conditionals to check if there is a session.
 Used try and except block to make sure nothing would break during authenticate.
 - https://docs.python.org/3/tutorial/errors.html
-
-Fixing Code
-password type to password -> gets the dots
-Use POST not GET -> GET shows username and password in the url
-Don't show username and password when incorrect?
