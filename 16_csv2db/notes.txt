@@ -1,7 +1,18 @@
 Team Berd: Austin Ngan (Gerald), Thomas Yu (Perry), Mark Zhu (Bob the Third Jr)
 SoftDev
 K16: All About Database
-2021-10-21
+2021-10-24
+
+- In sqlite3 shell commands interacting with the database must end with a semicolon
+- Adding a TEXT value into the database has to be in string format (with quotations around it)
+- "INSERT INTO roster VALUES (?)", (<?>)
+  - the ? within the string in the parentheses acts as a variable.
+  - the <?> is the value you want to add to the database and goes outside the string.
+  - https://docs.python.org/3/library/sqlite3.html
+- f Strings
+  - f"{ var }"
+  - var has to be defined outside of the string
+  - Allows you to add TEXT values into the database through python (as it needs to be in string formatting)
 
 Relational database
 
