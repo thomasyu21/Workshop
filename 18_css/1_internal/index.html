@@ -1,12 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- Clyde "Thluffy" Sinclair
+  <!-- Yaying Liang, Thomas Yu
        SoftDev pd0
        K18 -- CSS basics
-       2021-11-23t
+       2021-11-22
 
-	 WORK FILE for CSS 	
+	 WORK FILE for CSS
     -->
+
+  <style>
+
+    body{
+      background:gray;
+      font-family:sans-serif
+    }
+
+    h1{
+      color:white;
+      background:darkgray;
+      text-align:center;
+      padding:0%;
+      margin:0
+    }
+
+    .wrapper{
+      display:grid;
+      grid-template-columns:2;
+      background-color:#747574
+    }
+
+    .nav{
+      grid-column:1/2;
+      padding-left:10%;
+      padding-right:10%
+    }
+
+    ul{
+      list-style:none;
+      padding-left:0%;
+      width:100px
+    }
+
+    a{
+      text-decoration:none;
+      color:Gainsboro;
+      font-weight:bold
+    }
+
+    .text{
+      grid-column:2/2;
+      padding-left:15%
+    }
+
+    .footer{
+      text-align:right;
+      color:#797979;
+      background:#606060;
+      padding:15px;
+      padding-bottom:0;
+      margin:0
+    }
+
+  </style>
 
   <head>
     <meta charset="utf-8"/>
@@ -15,20 +70,29 @@
 
   <body>
     <h1>foo heading 1</h1>
-    <h3>nav foo</h3>
-    <ul>
-      <li><a href="">dis</a></li>
-      <li><a href="">dat</a></li>
-      <li><a href="">de udda ting</a></li>
-    </ul>
-    <h2>main foo heading</h2>
-    <p>tk tk tk tk tk tk tk tk tk tk tk tk tk tk tk tk tk tk tk tk 
-
-      <br>
-      <br>
-
-      Copyright &copy; 2021 Clyde "Thluffy" Sinclair
-
+    <div class='wrapper'>
+      <div class='nav'>
+        <h3>nav foo</h3>
+        <ul>
+          <li><a href="">dis</a></li>
+          <li><a href="">dat</a></li>
+          <li><a href="">de udda ting</a></li>
+        </ul>
+      </div>
+    <div class='text'>
+      <h2>main foo heading</h2>
+      <p>Brie paneer cow. Say cheese airedale dolcelatte fromage frais danish fontina babybel bocconcini mascarpone. Halloumi monterey jack cheese slices cheddar cut the cheese camembert de normandie cheese triangles cheese triangles. Cheese strings cheese triangles hard cheese cow manchego parmesan.
+        <br>
+        <br>
+        Croque monsieur boursin squirty cheese. Everyone loves cheese triangles gouda melted cheese st. agur blue cheese fromage emmental cottage cheese. Fondue caerphilly dolcelatte cheese slices roquefort when the cheese comes out everybody's happy stinking bishop fromage frais. Who moved my cheese taleggio taleggio cheese on toast.
+        <br>
+        <br>
+        <!-- http://www.cheeseipsum.co.uk/ -->
+      </div>
+    </div>
+    <div class='footer'>
+      Copyright &copy; 2021 Yaying Liang, Thomas Yu
+    <div class='footer'>
   </body>
 
 </html>

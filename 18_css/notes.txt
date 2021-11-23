@@ -1,0 +1,12 @@
+Yaying Liang, Thomas Yu
+SoftDev pd0
+K18 -- CSS basics
+2021-11-22
+
+- There are multiple ways to implement the same thing
+  - Flex and grid can both be used to create the layout of the page (nav on the left, text on the right)
+- All three methods of implementing css use the same lines of basic syntax
+  - Only thing that changes is the formatting
+- Inline css formatting is very messy and hard to read
+- Internal and external css separates the css from the html stuff
+  - Keeps it cleaner and easier to read
