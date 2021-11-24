@@ -1,0 +1,13 @@
+Team dinoClock: Yaying Liang Li, Thomas Yu
+SoftDev
+K19 -- A RESTful Joruney Skyward
+2021-11-23
+
+- The JSON in the browser is formatted nicely to separate the key value pairs.
+- In the raw data, each key and value is separated by a colon and each key value pair is separated by a comma.
+
+- Uses a GET request to create the HTTP response
+
+- urlopen opens a HTTP response
+- json.loads() takes in a string -> gives error when feeding in the HTTP response
+- json.load() will take in the HTTP response
