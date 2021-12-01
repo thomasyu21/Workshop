@@ -1,0 +1,22 @@
+Team dinoClock: Yaying Liang Li, Thomas Yu
+SoftDev
+K23 -- Who Does Frame Work For?
+2021-12-01
+
+DISCO
+- You can manually set the sizes for each cell in a grid at three breakpoints (small, medium, large)
+	- Bootstrap has set sizes for breakpoints
+- Grid padding x and grid padding y are automatic
+- Grid x refers to a row of cells
+	- If too long will snap to the next line
+- Grid y refers to a column of cells
+	- Snaps based on window width, not window height
+	- Maintains set height for the entire grid (changes cell height)
+
+QCC
+
+
+Q0
+
+
+Q1
