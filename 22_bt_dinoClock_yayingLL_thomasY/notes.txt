@@ -1,0 +1,15 @@
+Team dinoClock: Yaying Liang Li, Thomas Yu
+SoftDev
+K22 -- Who Does Frame Work For?
+2021-11-30
+
+- Each type of class (container, table, form, btn) have many subclasses
+  - The stylings applied are dependent on the class
+    - Will contain keywords/phrases to dictate size, color, exact purpose
+    - Example: lg, sm are sizes for containers
+  - Classes are built upon the already existing HTML tags.
+
+- All aspects of styling are designed to change size alongside the browser window's size.
+
+- The Navbar button (for the navbar heading) has many different parts
+  - Not sure exaclty what each part does.
