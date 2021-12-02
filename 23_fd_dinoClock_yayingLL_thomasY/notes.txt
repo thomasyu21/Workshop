@@ -12,11 +12,18 @@ DISCO
 - Grid y refers to a column of cells
 	- Snaps based on window width, not window height
 	- Maintains set height for the entire grid (changes cell height)
+- The auto tag automatically fills the rest of the page
+- A wrapper class is needed in order to get independent scrolling bodies
+- Cell sizes work similarly to Bootstrap (12 sections, number with the cell size is how many sections of the window the cell takes up)
 
 QCC
-
+- Can you have the scrolling body work for multiple cell sizes
+	- Only got it working for one size (small, medium, or large)
+	- No longer a scrolling body for the other 2 sizes
 
 Q0
-
+- No I did not consult resources beyond the neighboring duo's on-ramp
+	- Was quite simple, although there was not much to work with
+	- Only had grid, padding, and independent scrolling bodies
 
 Q1
