@@ -27,3 +27,10 @@ Q0
 	- Only had grid, padding, and independent scrolling bodies
 
 Q1
+- Note exactly sure -> think I prefer Bootstrap more
+	- Spent more time learning it myself -> more exploration into more features (rather than just what we feel are core)
+		- Leads to more comfort
+	- Classes that I worked with in Bootstrap seem more self-explanatory?
+- Didn't work much with Foundation features
+	- However quick glance at documentation -> seems to be able to provide the same features
+	- Look at navbar -> seems much easier to understand compared to Bootstrap
