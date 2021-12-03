@@ -19,10 +19,22 @@
         	   <div class="cell" style="background:red; color:white">
         	   	Team dinoClock: Yaying Liang Li, Thomas Yu
               <h1 style="font-weight: bold;">Pokédex?</h1>
+
+              <!-- search bar in pokedex -->
+              <label>
+                <h5> Search for a Pokemon: </h5>
+                <textarea placeholder="Pikachu"></textarea>
+              </label>
+
         	   </div>
       	</div>
+        <!-- [size]-auto: tells cell to use up remaining space
+            cell-block-container: container for inside a grid frame containing multiple blocks
+        -->
         <div class="cell large-auto large-cell-block-container">
+          <!-- grid-padding-x and y give padding to grid (automatically) -->
           <div class="grid-x grid-padding-x grid-padding-y">
+            <!-- cell-block-y modifies cell to give it "block" behavior: auto overflow, vertical scrollbar -->
             <div class="cell medium-6 large-3 large-cell-block-y" style="background-color: #7AC74C">
               <h3> #01 - Bulbasaur <br> </h3>
               <h4> Seed Pokémon<br><br> </h4>
@@ -40,6 +52,15 @@
               Hatch Time: 5140-5396 steps<br><br>
               Base Friendship: 70<br><br>
               EV Yield: 1 Sp.Atk, 1 Sp.Def
+
+              <!-- forms! -->
+              <fieldset class="fieldset">
+                <legend>Who's that Pokemon?</legend>
+                <input id="checkbox12" type="radio"><label for="checkbox12">Sceptile</label> <br>
+                <input id="checkbox22" type="radio"><label for="checkbox22">Ivysaur</label> <br>
+                <input id="checkbox32" type="radio"><label for="checkbox32">Bulbasaur</label>
+              </fieldset>
+
             </div>
             <div class="cell medium-6 large-3 large-cell-block-y" style="background-color: #EE8130">
               <h3> #04 - Charmander <br> </h3>
@@ -58,6 +79,14 @@
               Hatch Time: 5140-5396 steps<br><br>
               Base Friendship: 70<br><br>
               EV Yield: 1 Speed
+
+              <fieldset class="fieldset">
+                <legend>Who's that Pokemon?</legend>
+                <input id="checkbox12" type="radio"><label for="checkbox12">Charizard</label> <br>
+                <input id="checkbox22" type="radio"><label for="checkbox22">Charmander</label> <br>
+                <input id="checkbox32" type="radio"><label for="checkbox32">Chimchar</label>
+              </fieldset>
+
             </div>
             <div class="cell medium-6 large-3 large-cell-block-y" style="background-color: #6390F0">
               <h3> #07 - Squirtle <br> </h3>
@@ -76,6 +105,14 @@
               Hatch Time: 5140-5396 steps<br><br>
               Base Friendship: 70<br><br>
               EV Yield: 1 Def
+
+              <fieldset class="fieldset">
+                <legend>Who's that Pokemon?</legend>
+                <input id="checkbox12" type="radio"><label for="checkbox12">Piplup</label> <br>
+                <input id="checkbox22" type="radio"><label for="checkbox22">Squirtle</label> <br>
+                <input id="checkbox32" type="radio"><label for="checkbox32">Wartortle</label>
+              </fieldset>
+
             </div>
             <div class="cell medium-6 large-3 large-cell-block-y" style="background-color: #F7D02C">
               <h3> #25 - Pikachu <br> </h3>
@@ -94,6 +131,14 @@
               Hatch Time: 2570-2826 steps<br><br>
               Base Friendship: 70<br><br>
               EV Yield: 2 Speed
+
+              <fieldset class="fieldset">
+                <legend>Who's that Pokemon?</legend>
+                <input id="checkbox12" type="radio"><label for="checkbox12">Pikachu</label> <br>
+                <input id="checkbox22" type="radio"><label for="checkbox22">Pichu</label> <br>
+                <input id="checkbox32" type="radio"><label for="checkbox32">Raichu</label>
+              </fieldset>
+
             </div>
           </div>
         </div>
