@@ -1,0 +1,26 @@
+Ubuntu 20.04 (LTS)
+Basic, Regular Intel with SSD, $5/mo
+NY datacenter
+No additional options
+SSH key authentication
+Hostname -> Theme for naming convention
+- Capri Sun Flavors
+No backups
+
+Prerequisites
+- Ubuntu 20.04 server with non root sudo enabled user account
+- Basic firewall
+
+Connecting to Droplet
+ssh root@<ipv4> (BAD!!!)
+https://www.digitalocean.com/community/questions/secure-ubuntu-server-for-non-root-user-using-only-ssh-keys?answer=22286
+ssh username@<ipv4>
+
+Commands to get Apache2
+sudo apt update
+sudo apt install apache2
+- Asks about storage (say yes)
+sudo ufw app list
+- Lists applications into terminal
+sudo ufw allow in "Apache"
+- Can check at http://<server_ip>
