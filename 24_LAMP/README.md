@@ -10,8 +10,7 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
 - Verfied DigitalOcean Account
   - Requires a credit card or paypal account to be link to the account
 
-### 1. Create a Droplet ###
-
+### 1. Create a Droplet ###  
 
     1. Choose an Image/OS: Ubuntu 20.04 LTS
     2. Choose a Plan: Basic
