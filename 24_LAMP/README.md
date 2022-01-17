@@ -20,6 +20,7 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
     7. Hostname: Something Portending Greatness
 
 2. Connect to Droplet:  
+
   Go to droplet in browser and use the console  
 
   or in the terminal:
@@ -27,6 +28,7 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
   $ ssh root@<ipv4>
   ```
   Replace `ipv4` with that of your droplet.
+
 
 3. Creating a New User
   ```
@@ -46,6 +48,7 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
   $ ssh <username>@<ipv4>
   ```
 
+
 4. Disabling Root SSH
   ```
   $ sudo nano /etc/ssh/sshd_config
@@ -54,6 +57,7 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
   ```
   $ sudo service ssh restart
   ```
+
 
 5. Enabling the Firewall
   ```
@@ -64,7 +68,8 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
   ```
   $ sudo ufw status
   ```
-  
+
+
 6. Install Apache2
 
 
