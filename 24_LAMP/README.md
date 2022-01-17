@@ -11,16 +11,17 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
   - Requires a credit card or paypal account to be link to the account
 
 1. Create a Droplet
-  1. Choose an Image/OS: Ubuntu 20.04 LTS
-  2. Choose a Plan: Basic
-  3. CPU Options: Regular Intel with SSD; $5/mo plan
-  4. Datacenter Region: Somewhere Close (New York)
-  5. Authentication: Preferably SSH keys, but can start with password and then transition
-  6. Additional Options: None
-  7. Hostname: Something Portending Greatness
+    1. Choose an Image/OS: Ubuntu 20.04 LTS
+    2. Choose a Plan: Basic
+    3. CPU Options: Regular Intel with SSD; $5/mo plan
+    4. Datacenter Region: Somewhere Close (New York)
+    5. Authentication: Preferably SSH keys, but can start with password and then transition
+    6. Additional Options: None
+    7. Hostname: Something Portending Greatness
 
-2. Connect to Droplet:
+2. Connect to Droplet:  
   Go to droplet in browser and use the console  
+
   or in the terminal:
   ```
   $ ssh root@<ipv4>
@@ -34,8 +35,10 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
   Replace `username` with your desired username.  
   It will prompt you to create a password linked to your username to ssh into the droplet.  
   It will then prompt you to add information associated to that account. You can choose to leave it blank (just hit Enter for each prompt)
+
+  Now to give the account the power to use the sudo command
   ```
-  # usermod -aG <username>
+  # usermod -aG sudo <username>
   ```
   Now logout of root and connect through the new user you created.  
   ```
@@ -61,7 +64,7 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
   ```
   $ sudo ufw status
   ```
-
+  
 6. Install Apache2
 
 
