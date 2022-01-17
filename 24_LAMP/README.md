@@ -10,7 +10,7 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
 - Verfied DigitalOcean Account
   - Requires a credit card or paypal account to be link to the account
 
-1. Create a Droplet
+### 1. Create a Droplet ###
     1. Choose an Image/OS: Ubuntu 20.04 LTS
     2. Choose a Plan: Basic
     3. CPU Options: Regular Intel with SSD; $5/mo plan
@@ -19,7 +19,7 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
     6. Additional Options: None
     7. Hostname: Something Portending Greatness
 
-2. Connect to Droplet:  
+### 2. Connect to Droplet: ###
 
   Go to droplet in browser and use the console  
 
@@ -29,8 +29,7 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
   ```
   Replace `ipv4` with that of your droplet.
 
-
-3. Creating a New User
+### 3. Creating a New User ###
   ```
   # adduser <username>
   ```
@@ -48,8 +47,7 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
   $ ssh <username>@<ipv4>
   ```
 
-
-4. Disabling Root SSH
+### 4. Disabling Root SSH ###
   ```
   $ sudo nano /etc/ssh/sshd_config
   ```
@@ -58,8 +56,7 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
   $ sudo service ssh restart
   ```
 
-
-5. Enabling the Firewall
+###5. Enabling the Firewall ###
   ```
   $ sudo ufw allow ssh
   $ sudo ufw enable
@@ -69,25 +66,95 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
   $ sudo ufw status
   ```
 
+### 6. Install Apache2 ###
 
-6. Install Apache2
+  To Install Apache2:
+  ```
+  $ sudo apt update
+  $ sudo apt install apache2
+  $ sudo ufw allow in "Apache"
+  ```
+  To make sure that everything is working:
+  ```
+  $ sudo ufw status
+  ```
+  Which should return:
+  ```
+  Status: active
 
+  To                         Action      From
+  --                         ------      ----
+  22/tcp                     ALLOW       Anywhere
+  Apache                     ALLOW       Anywhere
+  22/tcp (v6)                ALLOW       Anywhere (v6)
+  Apache (v6)                ALLOW       Anywhere (v6)
+  ```
 
-Step, with
-    ```
-    generic code block or terminal command
-    ```
-   and/or...
-    ```javascript
-    var foo = "this that JS tho";
-    ```
-   and/or...
-    ```python
-    print("this that Python tho")
-    ```
-   and/or...
-1. Step, with [hyperlink](https://xkcd.com)s...
+### 7. Virtual Host Setup ###
 
+  ```
+  $ sudo mkdir /var/www/<domain_name>
+  $ sudo chown -R $USER:$USER /var/www/<domain_name>
+  ```
+  Replace <domain_name> with your domain name
+  ```
+  $ sudo nano /etc/apache2/sites-available/<domain_name>.conf
+  ```
+  In the `<domain_name>.conf` file:
+  ```
+  <VirtualHost *:80>
+    ServerName <domain_name>
+    ServerAlias www.<domain_name>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/<domain_name>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+  </VirtualHost>
+  ```
+  Once again replaing <domain_name> with your domain name  
+  To activate the host:
+  ```
+  $ sudo a2ensite <domain_name>
+  ```
+  You may need to disable the default virtual host
+  ```
+  $ sudo a2dissite 000-default
+  ```
+  Then check for syntax errors and reload apache2:
+  ```
+  $ sudo apachectl configtest
+  $ sudo systemctl reload apache2
+  ```
+
+### 8. Create a temporary HTML file for the site ###
+  ```
+  $ nano /var/www/<domain_name>/index.html
+  ```
+  Fill the HTML file with what you want as a standin.  
+  Example:
+  ```
+  <html>
+    <head>
+      <title>Temporary Page</title>
+    </head>
+    <body>
+      <h1>Hello!</h1>
+    </body>
+  </html>
+  ```
+  Visit the site at:
+  `http://<domain_name>` or `http://<ipv4>`
+
+### 9. Some Packages and SQLite3 ###
+  To install SQLite3:
+  ```
+  $ sudo apt install sqlite3
+  ```
+  Some Python packages you will need:
+  ```
+  $ sudo apt install python3-pip
+  $ sudo apt install python-venv
+  ```
 
 ### Resources
 * https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-20-04
@@ -103,7 +170,7 @@ Step, with
 
 ---
 
-Accurate as of (last update): 2022-01-11
+Accurate as of (last update): 2022-01-16
 
 #### Contributors:  
 Clyde "Thluffy" Sinclair  
