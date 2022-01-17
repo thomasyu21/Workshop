@@ -11,6 +11,8 @@ Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apa
   - Requires a credit card or paypal account to be link to the account
 
 ### 1. Create a Droplet ###
+
+
     1. Choose an Image/OS: Ubuntu 20.04 LTS
     2. Choose a Plan: Basic
     3. CPU Options: Regular Intel with SSD; $5/mo plan
