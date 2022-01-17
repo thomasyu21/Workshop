@@ -1,26 +1,83 @@
-Ubuntu 20.04 (LTS)
-Basic, Regular Intel with SSD, $5/mo
-NY datacenter
-No additional options
-SSH key authentication
-Hostname -> Theme for naming convention
-- Capri Sun Flavors
-No backups
+Suns of Capri: Jonathan Wu, Thomas Yu, Mark Zhu
+SoftDev
+K24 -- Cold LAMPin w Flav
+2022-01-16
 
 Prerequisites
-- Ubuntu 20.04 server with non root sudo enabled user account
-- Basic firewall
+- DigitalOcean Account
+
+Creating Droplet
+- Ubuntu 20.04 (LTS)
+- Basic, Regular Intel with SSD, $5/month
+- No additional options
+- SSH key authentication
+- Choose a hostname
+- No backups
 
 Connecting to Droplet
 ssh root@<ipv4> (BAD!!!)
-https://www.digitalocean.com/community/questions/secure-ubuntu-server-for-non-root-user-using-only-ssh-keys?answer=22286
 ssh username@<ipv4>
 
-Commands to get Apache2
-sudo apt update
-sudo apt install apache2
-- Asks about storage (say yes)
-sudo ufw app list
-- Lists applications into terminal
-sudo ufw allow in "Apache"
-- Can check at http://<server_ip>
+New User
+- First connect via root (or console in browser)
+- # adduser <username>
+- Create password for user
+- Entering Information -> can just leave blank
+- # usermod -aG sudo <username>
+
+Disabling SSH via Root
+- $ sudo nano /etc/ssh/sshd_config
+- PermitRootLogin -> no
+- $ sudo service ssh restart
+
+Adding SSH authentication to logging in as user
+- $ sudo nano /etc/ssh/sshd_config
+- PasswordAuthentication -> yes
+- $ sudo service sshd restart
+- $ logout
+  ON LOCAL MACHINE
+  - $ssh-copy-id username@droplet.ip
+  - Replace username with username and droplet.ip with ipv4
+
+Enabling Firewall
+- $ sudo ufw allow ssh
+- $ sudo ufw enable
+- $ sudo ufw app list
+
+Installing Apache2
+- $ sudo apt update
+- $ sudo apt install apache2
+  - Asks about storage (say yes)
+- $ sudo ufw app list
+  - Lists applications into terminal
+- $ sudo ufw allow in "Apache"
+  - Can check at http://<server_ip>
+
+Install Sqlite3
+- $ sudo apt install sqlite3
+
+Python Stuff for Flask
+- $ sudo apt install python3-pip
+- $ sudo apt install python-venv
+
+Virtual Host Setup
+- $ sudo mkdir /var/www/<domain_name>
+- $ sudo chown -R $USER:$USER /var/www/<domain_name>
+- $ sudo nano /etc/apache2/sites-available/<domain_name>.conf
+    <VirtualHost *:80>
+      ServerName <domain_name>
+      ServerAlias www.<domain_name>
+      ServerAdmin webmaster@localhost
+      DocumentRoot /var/www/<domain_name>
+      ErrorLog ${APACHE_LOG_DIR}/error.log
+      CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
+- $ sudo a2ensite <domain_name>
+- $ sudo a2dissite 000-default
+- $ sudo apachectl configtest
+- $ sudo systemctl reload apache2
+
+HTML FILE FOR SITE
+- $ nano /var/www/<domain_name>/index.html
+- Create html file to display on site
+- http://<domain_name> or http://<ipv4>
