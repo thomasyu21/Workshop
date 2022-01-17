@@ -1,181 +1,262 @@
-# how-to :: CREATE A DIGITAL OCEAN DROPLET WITH UBUNTU AND APACHE
+# how-to :: A COMPREHENSIVE GUIDE TO CREATING A DIGITAL OCEAN DROPLET WITH UBUNTU, FLASK, AND APACHE ON LINUX MACHINES
 ---
 ## Overview
-Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apache2 web server on it.
+Guide to creating an ubuntu 20.04 virtual machine ("droplet") and installing Apache2 web server on it, as well as being able to serve Flask applications on linux-based machines.
 
-### Estimated Time Cost: 1 Hour
+### Estimated Time Cost: 30 Minutes
 
 ### Prerequisites:
 
-- Verfied DigitalOcean Account
-  - Requires a credit card or paypal account to be link to the account
-
-### 1. Create a Droplet ###  
-
-    1. Choose an Image/OS: Ubuntu 20.04 LTS
-    2. Choose a Plan: Basic
-    3. CPU Options: Regular Intel with SSD; $5/mo plan
-    4. Datacenter Region: Somewhere Close (New York)
-    5. Authentication: Preferably SSH keys, but can start with password and then transition
-    6. Additional Options: None
-    7. Hostname: Something Portending Greatness
-
-### 2. Connect to Droplet: ###
-
-  Go to droplet in browser and use the console  
-
-  or in the terminal:
+- These instructions assume that you're creating your droplet from the school's CS Lab machines.
+- You should have your DigitalOcean account have a balance of $100 already.
+- To get into the school's CS labs, just
   ```
-  $ ssh root@<ipv4>
-  ```
-  Replace `ipv4` with that of your droplet.
-
-### 3. Creating a New User ###
-  ```
-  # adduser <username>
-  ```
-  Replace `username` with your desired username.  
-  It will prompt you to create a password linked to your username to ssh into the droplet.  
-  It will then prompt you to add information associated to that account. You can choose to leave it blank (just hit Enter for each prompt)
-
-  Now to give the account the power to use the sudo command
-  ```
-  # usermod -aG sudo <username>
-  ```
-  Now logout of root and connect through the new user you created.  
-  ```
-  # logout
-  $ ssh <username>@<ipv4>
+    ssh <stuy user>@149.89.160.1XX <XX being a number from 01-30>
   ```
 
-### 4. Disabling Root SSH ###
-  ```
-  $ sudo nano /etc/ssh/sshd_config
-  ```
-  Within the file, changed `PermitRootLogin` from `yes` to `no`
-  ```
-  $ sudo service ssh restart
-  ```
+### Instructions
 
-###5. Enabling the Firewall ###
-  ```
-  $ sudo ufw allow ssh
-  $ sudo ufw enable
-  ```
-  To check that the firewall enabled use:
-  ```
-  $ sudo ufw status
-  ```
+#### 1.  Create Your SSH Keys  
+* In your terminal, type
+    ```
+    ssh-keygen
+    ```
+    * Make sure that when prompted for a ```file in which to save the key```, you just press ENTER so it defaults to ```id_rsa```. If there is already an ```id_rsa```, then save it as something else (use a creative name or something).
+* Then
+    ```
+    cd /home/students/2022/<stuy user>/.ssh/
+    ```
+* Then
+    ```
+    cat id_rsa.pub
+    ```
+* Copy the contents of it from ```ssh-rsa``` to (and including) ```<stuy user>@cslab<number>```.
+* Navigate to DigitalOcean and login.
+    * Go to ```Settings``` >> ```Security``` >> ```Add SSH Key``` >> and paste your public SSH Key into the field. Name it something descriptive and save.
+    * Click the green ```Create``` >> ```Droplets``` >> with the settings of
+        * Ubuntu
+        * Basic
+        * Regular Intel with SSD, $5/mo
+        * NY datacenter region
+        * SSH Key Authentication
+        * Use a creative hostname
+    * Create Droplet
 
-### 6. Install Apache2 ###
+#### 2.  Setting Up SSH Into Your Droplets  
+* In your terminal, start by SSHing into the created droplet.
+    ```
+    ssh root@<your_server_ip>
+    ```
+* Then  
+    ```
+    adduser <your_username>
+    ```
+    * <your_username> can be any username you want, just make sure it's something you remember and it's consistent.
+* Then  
+    ```
+    usermod -aG sudo <your_username>
+    ```
+* Then  
+    ```
+    ufw allow OpenSSH
+    ```
+* Then  
+    ```
+    ufw enable
+    ```
+* Then  
+    ```   
+    rsync --archive --chown=<your_username>:<your_username> ~/.ssh /home/<your_username>
+    ```
 
-  To Install Apache2:
-  ```
-  $ sudo apt update
-  $ sudo apt install apache2
-  $ sudo ufw allow in "Apache"
-  ```
-  To make sure that everything is working:
-  ```
-  $ sudo ufw status
-  ```
-  Which should return:
-  ```
-  Status: active
+#### As root user, try to ```ssh <your_username>@<your_server_ip>``` into your user account. 
+#### Oh no! I get a ```Permission denied (publickey)``` when I ```ssh <your_username>@<your_server_ip>```, what do I do?
+* If you get this issue, try to follow these steps, otherwise, skip to the next step.  
+* Open a new terminal session and SSH into a CS Lab (if you aren't in there already).  
+* Try  
+    ```
+    ssh-copy-id -f <your_username>@<your_server_ip>
+    ```
+    * If it says that the ```Number of key(s) added: 1```, or something similar, then you're in the clear.
+* And THEN  
+* Go back into the first terminal (the one with root access) and type  
+    ```
+    sudo nano /etc/ssh/sshd_config
+    ```
+* Then, search for ```PasswordAuthentication```  
+    ```
+    PasswordAuthentication no
+    ```
+    * Should be rewritten as:
+    ```
+    PasswordAuthentication yes
+    ```
+    * Save and exit.
+* Then  
+    ```
+    sudo service sshd reload
+    ```
+* Then   
+    ```
+    ssh <your_username>@<your_server_ip>
+    ```
+    * It should prompt you for your password, which you should've remembered, so time that in and it should let you in.
+* LAST, BUT NOT LEAST. Exit your user account back into your root account. We're going to disable root access from the user account.
+    ```
+    sudo nano /etc/ssh/sshd_config
+    ```
+* Then  
+    ```
+    PermitRootLogin yes
+    ```
+    * Should be rewritten as:
+    ```
+    PermitRootLogin no
+    ```   
+    * Save and exit.
+* Then  
+    ```
+    sudo service ssh restart
+    ```
+* If that's successful, exit all connections until you are back into your CS Lab terminal.  
 
-  To                         Action      From
-  --                         ------      ----
-  22/tcp                     ALLOW       Anywhere
-  Apache                     ALLOW       Anywhere
-  22/tcp (v6)                ALLOW       Anywhere (v6)
-  Apache (v6)                ALLOW       Anywhere (v6)
-  ```
+#### 3. Installing Apache2; First, SSH back into your user account.  
+    ```
+    ssh <your_username>@<your_server_ip>
+    ```
+* Then   
+    ```
+    sudo apt update
+    ```
+    * You will often need to update and upgrade, so run those commands often!
+* Then   
+    ```
+    sudo apt install apache2
+    ```
+* Then   
+    ```
+    sudo ufw allow 'Apache'
+    ```
+* Then   
+    ```
+    sudo ufw allow 5000
+    ```
+* If you do ```sudo ufw status```, you SHOULD see this:
+    ```
+    Status: active
+    To                         Action      From
+    --                         ------      ----
+    OpenSSH                    ALLOW       Anywhere
+    Apache                     ALLOW       Anywhere
+    5000                       ALLOW       Anywhere
+    OpenSSH (v6)               ALLOW       Anywhere (v6)
+    Apache (v6)                ALLOW       Anywhere (v6)
+    5000 (v6)                  ALLOW       Anywhere (v6)
+    ```
+* Open your web browser and paste your server ip into the URL bar. It should display the Ubuntu web page telling you that it works! Congratulations. We're not quite done yet, however.
 
-### 7. Virtual Host Setup ###
+#### 4. Installing Flask and Deploying Flask
+* In your terminal, type
+    ```
+    cd /var/www/
+    ```
+* Then  
+    ```
+    sudo apt-get update
+    ```
+* Then  
+    ```
+    sudo apt-get upgrade
+    ```
+* Then  
+    ```
+    sudo apt-get install libapache2-mod-wsgi python3-dev
+    ```
+* Then  
+    ```
+    sudo apt-get install python3-pip
+    ```
+* Then  
+    ```
+    sudo apt-get install python3-venv
+    ```
+* Then
+    ```
+    sudo pip install virtualenv
+    ```
+* Then  
+    ```
+    sudo a2enmod wsgi
+    ```
+* Then  
+    ``` 
+    sudo mkdir <directory_name>
+    ```
+* Then  
+    ```
+    cd <directory_name>
+    ```
+* Then  
+    ```
+    python3.8 -m venv env
+    ```
+* Then  
+    ``` 
+    source env/bin/activate
+    ```
+* Then  
+    ``` 
+    sudo pip3 install flask
+    ```
+* Then  
+    ```
+    sudo nano __init__.py
+    ```
+* The sample code to run:
+    ```python
+    from flask import Flask
+    app = Flask(__name__)
 
-  ```
-  $ sudo mkdir /var/www/<domain_name>
-  $ sudo chown -R $USER:$USER /var/www/<domain_name>
-  ```
-  Replace <domain_name> with your domain name
-  ```
-  $ sudo nano /etc/apache2/sites-available/<domain_name>.conf
-  ```
-  In the `<domain_name>.conf` file:
-  ```
-  <VirtualHost *:80>
-    ServerName <domain_name>
-    ServerAlias www.<domain_name>
-    ServerAdmin webmaster@localhost
-    DocumentRoot /var/www/<domain_name>
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
-  </VirtualHost>
-  ```
-  Once again replaing <domain_name> with your domain name  
-  To activate the host:
-  ```
-  $ sudo a2ensite <domain_name>
-  ```
-  You may need to disable the default virtual host
-  ```
-  $ sudo a2dissite 000-default
-  ```
-  Then check for syntax errors and reload apache2:
-  ```
-  $ sudo apachectl configtest
-  $ sudo systemctl reload apache2
-  ```
+    @app.route("/")
+    def index():
+        return "<h1>Hi there!</h1>"
 
-### 8. Create a temporary HTML file for the site ###
-  ```
-  $ nano /var/www/<domain_name>/index.html
-  ```
-  Fill the HTML file with what you want as a standin.  
-  Example:
-  ```
-  <html>
-    <head>
-      <title>Temporary Page</title>
-    </head>
-    <body>
-      <h1>Hello!</h1>
-    </body>
-  </html>
-  ```
-  Visit the site at:
-  `http://<domain_name>` or `http://<ipv4>`
+    if __name__ == "__main__":
+        app.run(host='0.0.0.0')
+    ```  
+* Run it!
+    ```
+    python3 __init__.py
+    ```
+* You should see:
+    ```
+     * Serving Flask app '__init__' (lazy loading)
+     * Environment: production
+       WARNING: This is a development server. Do not use it in a production deployment.
+       Use a production WSGI server instead.
+     * Debug mode: off
+     * Running on all addresses.
+       WARNING: This is a development server. Do not use it in a production deployment.
+     * Running on http://<your_server_ip>:5000/ (Press CTRL+C to quit)
+    ```
+* Paste that address into your URL bar and you should see that it has successfully run.
 
-### 9. Some Packages and SQLite3 ###
-  To install SQLite3:
-  ```
-  $ sudo apt install sqlite3
-  ```
-  Some Python packages you will need:
-  ```
-  $ sudo apt install python3-pip
-  $ sudo apt install python-venv
-  ```
+#### Congratulations! You have successfully setup your droplet!
 
 ### Resources
-* https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-20-04
 * https://www.digitalocean.com/community/questions/error-permission-denied-publickey-when-i-try-to-ssh
 * https://www.digitalocean.com/community/questions/secure-ubuntu-server-for-non-root-user-using-only-ssh-keys?answer=22286
-* https://www.digitalocean.com/community/tutorials/how-to-create-a-new-sudo-enabled-user-on-ubuntu-20-04-quickstart
 * https://www.digitalocean.com/docs/droplets/how-to/
 * https://www.digitalocean.com/community/questions/error-permission-denied-publickey-when-i-try-to-ssh?answer=44730
 * https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/putty/
 * https://www.digitalocean.com/docs/droplets/how-to/add-ssh-keys/create-with-openssh/
 * https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/openssh/
-* https://www.digitalocean.com/community/questions/how-can-i-disable-ssh-login-for-a-root-user-i-am-the-account-owner
-
+* https://pythonforundergradengineers.com/flask-app-on-digital-ocean.html
 ---
 
-Accurate as of (last update): 2022-01-16
+Accurate as of (last update): 2022-01-17
 
 #### Contributors:  
-Clyde "Thluffy" Sinclair  
-Topher Mykolyk, pd0  
-Thomas Yu, pd1  
-
-_Note: the two spaces after each name are important! ( <--burn after reading)  _
+Jonathan Wu, pd2  
+Thomas Yu, pd2  
+Mark Zhu, pd2  
