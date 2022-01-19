@@ -1,0 +1,50 @@
+Capri Suns: Jonathan Wu, Thomas Yu, Mark Zhu
+SoftDev
+K25 -- Apache, Jump On It
+2022-01-18
+
+local machine
+scp -r 09_flask_v0 user@droplet_ip:/home/user/
+
+droplet
+sudo cp -rf 09_flask_v0 /var/www/
+sudo apt-get install libapache2-mod-wsgi-py3 python-dev
+sudo a2enmod wsgi
+
+sudo chown -R $USER:$USER ../09_flask_v0
+sudo chmod -R 777 ../09_flask_v0
+
+sudo apt-get install python3-pip
+sudo pip install virtualenv
+sudo python3 -m venv env
+sudo chown -R $USER:$USER env/
+sudo chmod -R 777 env/
+. env/bin/activate
+pip install Flask
+python3 app.py
+
+sudo nano /var/www/09_flask_v0/09_flask_v0.conf
+Inside:
+<VirtualHost *:80>
+	ServerName <IP Address>
+	ServerAdmin user@ip_address
+	WSGIScriptAlias / /var/www/09_flask_v0/09_flask_v0.wsgi
+	<Directory /var/www/09_flask_v0/>
+		Order allow,deny
+		Allow from all
+	</Directory>
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	LogLevel warn
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+Not needed because no static folder
+	Alias /static /var/www/09_flask_v0/static
+	<Directory /static /var/www/09_flask_v0/static>
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+apache2ctl configtest -> test for syntax error
+
+sudo a2ensite 09_flask_v0
