@@ -1,35 +1,50 @@
 Capri Suns: Jonathan Wu, Thomas Yu, Mark Zhu
 SoftDev
 K25 -- Apache, Jump On It
-2022-01-18
+2022-01-19
 
-local machine
-scp -r 09_flask_v0 user@droplet_ip:/home/user/
-
-droplet
-sudo cp -rf 09_flask_v0 /var/www/
 sudo apt-get install libapache2-mod-wsgi-py3 python-dev
 sudo a2enmod wsgi
 
-sudo chown -R $USER:$USER ../09_flask_v0
-sudo chmod -R 777 ../09_flask_v0
+cd /var/www
+sudo mkdir <AppName>
 
+Create Tree:
+<AppName>
+├── <AppName>
+   ├── __init__.py
+   ├── static
+   └── templates
+
+Change app.run() to app.run(host='0.0.0.0')
+
+cd /var/www/
+sudo chown -R $USER:$USER <AppName>
+sudo chmod -R 777 <AppName>
+cd <AppName>
+
+Virtual Environment:
 sudo apt-get install python3-pip
 sudo pip install virtualenv
-sudo python3 -m venv env
-sudo chown -R $USER:$USER env/
-sudo chmod -R 777 env/
+python3 -m venv env
 . env/bin/activate
 pip install Flask
-python3 app.py
+python3 __init__.py
+deactivate
 
-sudo nano /var/www/09_flask_v0/09_flask_v0.conf
+.conf file:
+sudo nano /etc/apache2/sites-available/<AppName>.conf
 Inside:
 <VirtualHost *:80>
 	ServerName <IP Address>
 	ServerAdmin user@ip_address
-	WSGIScriptAlias / /var/www/09_flask_v0/09_flask_v0.wsgi
-	<Directory /var/www/09_flask_v0/>
+	WSGIScriptAlias / /var/www/<AppName>/<AppName>.wsgi
+	<Directory /var/www/<AppName>/<AppName>/>
+		Order allow,deny
+		Allow from all
+	</Directory>
+	Alias /static /var/www/<AppName>/<AppName>/static
+	<Directory /var/www/<AppName>/<AppName>/static>
 		Order allow,deny
 		Allow from all
 	</Directory>
@@ -38,12 +53,90 @@ Inside:
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 
-Not needed because no static folder
-	Alias /static /var/www/09_flask_v0/static
-	<Directory /static /var/www/09_flask_v0/static>
+sudo a2ensite <AppName>
+sudo a2dissite 000-default.conf
+systemctl reload apache2
+
+.wsgi file:
+sudo nano /var/www/<AppName>/<AppName>.wsgi
+Inside:
+#!/usr/bin/python
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/var/www/<AppName>/")
+sys.path.append("/var/www/<AppName>/<AppName>/")
+
+from <AppName> import app as application
+application.secret_key = <secret_key>
+
+apache2ctl configtest
+sudo service apache2 restart
+
+Check at http:/droplet_ip
+
+
+
+COMMANDS I RAN
+local machine
+scp -r myfoistapp user@droplet_ip:/home/user/
+
+droplet
+sudo cp -rf myfoistapp /var/www/
+sudo apt-get install libapache2-mod-wsgi-py3 python-dev
+sudo a2enmod wsgi
+
+sudo chown -R $USER:$USER ../myfoistapp
+sudo chmod -R 777 ../myfoistapp
+
+Change app.py to __init__.py
+Tree:
+myfoistapp
+├── myfoistapp
+	├── __init__.py
+	├── static
+	└── templates
+
+
+sudo apt-get install python3-pip
+sudo pip install virtualenv
+python3 -m venv env
+. env/bin/activate
+pip install Flask
+
+sudo nano /etc/apache2/sites-available/myfoistapp.conf
+Inside:
+<VirtualHost *:80>
+	ServerName <IP Address>
+	ServerAdmin user@ip_address
+	WSGIScriptAlias / /var/www/myfoistapp/myfoistapp.wsgi
+	<Directory /var/www/myfoistapp/myfoistapp/>
 		Order allow,deny
 		Allow from all
 	</Directory>
+	Alias /static /var/www/myfoistapp/myfoistapp/static
+	<Directory /var/www/myfoistapp/myfoistapp/static>
+		Order allow,deny
+		Allow from all
+	</Directory>
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	LogLevel warn
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+sudo a2ensite myfoistapp
+
+sudo nano /var/www/myfoistapp/myfoistapp.wsgi
+#!/usr/bin/python
+import sys
+import logging
+import os
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/var/www/myfoistapp/")
+sys.path.append("/var/www/myfoistapp/myfoistapp/")
+
+from myfoistapp import app as application
+application.secret_key = os.urandom(32)
 
 apache2ctl configtest -> test for syntax error
 
