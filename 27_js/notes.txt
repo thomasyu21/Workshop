@@ -1,0 +1,39 @@
+Raymond Yeung, Thomas Yu
+SoftDev pd1
+K27 -- Basic functions in JavaScript
+2022-02-03r
+
+DISCO
+-----------------------------------------------------------------
+* SCHEME WITH JAVA SYNTAX
+
+var fxnName = function(args) {
+	body;
+}
+
+or
+
+var fxnName = (args) => {
+	body;
+}
+
+Scheme to JS
+define -> var
+lambda (args) -> function(args) 
+
+USES SEMICOLONS
+
+console.log()
+- Prints things out in the Dev Console
+=================================================================
+
+QCC
+-----------------------------------------------------------------
+Why have multiple ways to declare a function?
+- Is one better than the other in different situations?
+
+How to get things from the js file to show up on the html file?
+- What does the script tag mean?
+
+
+=================================================================
