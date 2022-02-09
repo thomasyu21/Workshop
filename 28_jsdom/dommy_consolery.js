@@ -1,23 +1,3 @@
-/*
-   your PPTASK:
-   
-   Test drive each bit of code in this file,
-    and insert comments galore, indicating anything
-     you discover,
-    	have questions about,
-    		or otherwise deem notable.
-    		
-    		Write with your future self or teammates in mind.
-    		
-    		If you find yourself falling out of flow mode, consult 
-    		other teams
-    		MDN
-
-   A few comments have been pre-filled for you...
-   
-   (delete this block comment once you are done)
-*/
-
 // Raymond Yeung, Thomas Yu
 // SoftDev pd1
 // K28 -- Getting more comfortable with the dev console and the DOM
@@ -37,7 +17,7 @@ console.log(j);
 //Just variables we can print out in the console
 
 //assign an anonymous fxn to a var
-//Sets j to 30 and then adds whatever x is to j. 
+//Sets j to 30 and then adds whatever x is to j.
 //x can be positive or negative. If there is not x given the function returns NaN.
 //f(j) returns 50 -> The local j value (30) + the global j value (20)
 //f(i) joins the two into a string -> "30hello"
@@ -61,22 +41,33 @@ let o = { 'name' : 'Thluffy',
           }
         };
 
-//
+//Adds a new element to the list on the HTML file
+//addItem("item 8") -> "9. item 8" shows up on the site
+//returns undefined in the console when the function is ran
+//addItem() adds undefined
+//addItem("") adds and empty entry to the list
+//Numbers will automatically get turned into strings
+//Added values on the page don't have class=""
 let addItem = function(text) {
-  let list = document.getElementById("thelist");
-  console.log(list);
+  let list = document.getElementById("thelist"); //Gets every element in the list named "thelist" from the HTML file
   let newitem = document.createElement("li");
   newitem.innerHTML = text;
   list.appendChild(newitem);
 };
-console.log(thelist);
 
+//n is the index of the list for the item you want to remove
+//returns undefined in the console
+//n needs to be a number within bounds
+//Will return TypeError: listitems[n] is undefined when n is out of bounds
+//works with items that have been added to the list using addItem(text)
 let removeItem = function(n) {
-  let listitems = document.getElementsByTagName('li');
+  let listitems = document.getElementsByTagName('li'); //Get all the objects with the tag "li"
   listitems[n].remove();
 };
 
-
+//Makes the text color of the list red
+//Only changes the color of the list elements that do not already have a class -> those stay the same color
+//Items added afterwards are in black
 let red = function() {
   let items = document.getElementsByTagName("li");
   for(let i = 0; i < items.length; i++) {
@@ -84,7 +75,10 @@ let red = function() {
   }
 };
 
-
+//Alternates the colors of the items in the list (between red and blue)
+//Doesn't affect those that already have a class declared in the HTML file
+//Will override red(), but the opposite does not happen
+//Items added afterwards are unaffected
 let stripe = function() {
   let items = document.getElementsByTagName("li");
   for(let i = 0; i < items.length; i++) {
@@ -98,5 +92,39 @@ let stripe = function() {
 
 //insert your implementations here for...
 // FIB
-// FAC
+let fib = function(n) {
+     if (n <= 1){
+	return n;
+     }else{
+	return fib(n-1) + fib(n-2);
+     }
+}
+
+// FACT
+let fact = function(n) {
+     if (n == 0){
+        return 1;
+     }else{
+        return (n * (fact (n - 1)));
+     }
+}
+
 // GCD
+let gcd = function(a, b){
+  if (b < a){
+    return gcd(b, a);
+  }
+  if (b % a == 0){
+    return a;
+  }
+  for(let i = a; a > 0; i--){
+    if (a%i==0 && b%i==0){
+      return i;
+    }
+  }
+  return 1;
+}
+
+addItem("fib(6) = " + fib(6));
+addItem("fact(6) = " + fact(6));
+addItem("gcd(117, 54) = " + gcd(117, 54));

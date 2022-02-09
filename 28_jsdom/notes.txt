@@ -1,0 +1,19 @@
+Raymond Yeung, Thomas Yu
+SoftDev pd1
+K28 -- Manipulating the DOM
+2022-02-08t
+
+- console.log() in the js file will print things to the browser console
+- can only call functions after they have been initialized in the file
+- local variables exists in js
+- you can access parts of the HTML file by referring to their names
+- running functions in the js file will cause them to affect the HTML
+- knows what document is being referred to as it is called in index.html via the script tag
+
+- is there any way to change classes declared in the HTML file?
+- why does script() override the text color of red() but the opposite isn't the case?
+
+GCD function
+- takes the lower of the two numbers and tests if it is the GCD
+  - if not try the number 1 less than that (goes down to 1)
+- by no means is fast
