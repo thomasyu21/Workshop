@@ -2,3 +2,14 @@ Thomas Yu, Han Zhang
 SoftDev pd1
 K29 -- DOMfoolery++
 2022-02-09w
+
+- assign document.getElement to a variable first then addEventListener
+- can add the function to be executed directly in the addEventListener function
+  - done with event => {fxn}
+- adding and EventListener without event => {fxn}
+  - example: button.addEventListener('click', console.log("Hello"));
+  - Will automatically run the event when the page is loaded
+- js is able to access the parts of each object in the DOM
+  - through <object>.<part> (example: heading.innerText)
+  - can change the HTML file objects by accessing these parts
+    - example: heading.innerText = "Hello"
