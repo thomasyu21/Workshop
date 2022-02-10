@@ -13,3 +13,6 @@ K29 -- DOMfoolery++
   - through <object>.<part> (example: heading.innerText)
   - can change the HTML file objects by accessing these parts
     - example: heading.innerText = "Hello"
+- infinite recursion -> stopped automatically (error shown in dev console)
+  - site does not break completely
+  - only that one line of code with the infinite recursion breaks (will not update site)

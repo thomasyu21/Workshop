@@ -93,7 +93,10 @@ let stripe = function() {
 //insert your implementations here for...
 // FIB
 let fib = function(n) {
-     if (n <= 1){
+     if (n < 0){
+     	return -1
+     }
+     if (n === 1 || n === 0){
 	return n;
      }else{
 	return fib(n-1) + fib(n-2);
@@ -102,6 +105,9 @@ let fib = function(n) {
 
 // FACT
 let fact = function(n) {
+     if (n < 0){
+     	return -1;
+     }
      if (n === 0){
         return 1;
      }else{
@@ -132,22 +138,22 @@ let gcd = function(a,b) {
 
 let fibButton = document.getElementById("fib");
 fibButton.addEventListener('click', event => {
-  let n = document.getElementById("fibInput").value;
+  let n = parseInt(document.getElementById("fibInput").value);
   let ans = document.getElementById("fibOutput");
   ans.innerText = "= " + fib(n);
 });
 
 let factButton = document.getElementById("fact");
 factButton.addEventListener('click', event => {
-  let n = document.getElementById("factInput").value;
+  let n = parseInt(document.getElementById("factInput").value);
   let ans = document.getElementById("factOutput");
   ans.innerText = "= " + fact(n);
 });
 
 let gcdButton = document.getElementById("gcd");
 gcdButton.addEventListener('click', event => {
-  let a = document.getElementById("gcdInput1").value;
-  let b = document.getElementById("gcdInput2").value;
+  let a = parseFloat(document.getElementById("gcdInput1").value);
+  let b = parseFloat(document.getElementById("gcdInput2").value);
   let ans = document.getElementById("gcdOutput");
   ans.innerText = "= " + gcd(a, b);
 });
