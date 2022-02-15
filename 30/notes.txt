@@ -1,0 +1,27 @@
+Raymond Yeung, Thomas Yu
+SoftDev pd1
+K30
+2022-02-14
+
+element.addEventListener(event, function(n))
+- If function uses variable e (function(e))
+  - don't need function(n) -> just function
+
+clearRect()
+- Creates transparent black rectangle from top left to bottom right
+- clearRect(x1, y1, x2, y2)
+
+fillStyle = color;
+strokeStyle = color;
+
+beginPath -> starts drawing
+arc() -> arc(x, y, radius, startAngle, endAngle)
+- x, y = center of circle
+
+fill() and stroke() -> actually applies the style
+
+element.target -> target a value of the element
+- example: element.target.innerHTML
+
+offsetX and offsetY -> mouse coordinates within element
+c.width and c.height -> size of the element
