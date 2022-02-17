@@ -1,0 +1,22 @@
+Raymond Yeung, Thomas Yu
+SoftDev pd1
+K31 -- canvas based JS animation
+2022-02-16
+
+requestID is an integer
+- return value of requestAnimationFrame
+ 
+requestAnimationFrame(callback)
+- callback = function you want to run again
+
+cancelAnimationFrame(requestID)
+- stops the animation frame based on the requestID associated with the frame
+
+window refers to the browser window
+- requestAnimationFrame and cancelAnimationFrame work even without "window." in front
+
+if (requestID) {
+    window.cancelAnimationFrame(requestID);
+}
+- Checks if requestID is undefined (you are running it again)
+- Stops the animation from speeding up
