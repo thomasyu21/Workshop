@@ -1,0 +1,10 @@
+David Chong, Thomas Yu
+SoftDev pd1
+K32 -- More Moving Parts
+2022-02-17
+
+starts in random place in screen
+bouncing off wall -> flip some vector component
+- add a dx or dy -> simulate velocity?
+
+starting vector is the same
