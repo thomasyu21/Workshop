@@ -68,29 +68,26 @@ let image = new Image(60, 40);
 image.src = 'logo_dvd.jpg';
 
 //initiate start x,y,dx,dy for image movement
-let x = Math.floor(Math.random()*(c.width - image.width));
-let y = Math.floor(Math.random()*(c.height - image.height));
-let dx = 1;
-let dy = 1.2;
+let x, y, dx, dy;
 
 let dvdScreensaver = () => {
   console.log("playing dvd screensaver");
   console.log(requestID);
-	requestID = window.cancelAnimationFrame(requestID);
+  window.cancelAnimationFrame(requestID);
 
-	clear();
-	ctx.beginPath();
-	ctx.drawImage(image, x, y, image.width, image.height);
-	if (x < 1 || x >= c.width - image.width) {
-		dx *=-1;
-	}
-	if (y < 1 || y >= c.height - image.height) {
-		dy *=-1;
-	}
+  clear();
+  ctx.beginPath();
+  ctx.drawImage(image, x, y, image.width, image.height);
+  if (x < 1 || x >= c.width - image.width) {
+    dx *=-1;
+  }
+  if (y < 1 || y >= c.height - image.height) {
+    dy *=-1;
+  }
   x +=dx;
   y +=dy;
 
-	requestID = window.requestAnimationFrame(dvdScreensaver);
+  requestID = window.requestAnimationFrame(dvdScreensaver);
 };
 
 //var stopIt = function() {
@@ -106,5 +103,5 @@ dvdButton.addEventListener( "click" , () => {
   x = Math.floor(Math.random()*(c.width - image.width));
   y = Math.floor(Math.random()*(c.height - image.height));
   dx = 1;
-  dy = 1.3;
+  dy = 1.2;
   dvdScreensaver() });
