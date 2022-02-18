@@ -3,8 +3,23 @@ SoftDev pd1
 K32 -- More Moving Parts
 2022-02-17
 
+Observations:
 starts in random place in screen
 bouncing off wall -> flip some vector component
-- add a dx or dy -> simulate velocity?
-
+- add a dx or dy -> simulate velocity
 starting vector is the same
+starting position resets when the button is pressed
+
+Image() -> constructor for an Image object
+- used to create the image to be referred to in the js file
+- used to set size of image Image(width, height)
+
+IMAGE_OBJ.src
+- the image that IMAGE_OBJ is pointing to (like img src= in HTML)
+- can be pointed to an image in the directory -> can it be pointed to a link?
+
+CANVAS_CONTEXT.drawImage()
+- used to draw an image object to the screen
+
+Math.random() -> random value between 0 and 1
+Math.floor() -> sets a value to the greatest integer less than or equal to 

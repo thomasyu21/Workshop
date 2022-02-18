@@ -37,15 +37,16 @@ var growing = true;
 var drawDot = () => {
   console.log("drawDot invoked...")
   console.log(requestID);
-  
-  
+
+  window.cancelAnimationFrame(requestID);
+
   clear();
   if (radius > 249){
     growing = false;
   }else if (radius < 1){
     growing = true;
   }
-  
+
   if (growing === true){
     radius+=1;
   }else{
@@ -57,33 +58,53 @@ var drawDot = () => {
   ctx.arc(c.width/2, c.height/2, radius, 0, 2 * Math.PI);
   ctx.stroke();
   ctx.fill();
-  
-  if (requestID) {
-    window.cancelAnimationFrame(requestID);
-  }
+
   requestID = window.requestAnimationFrame(drawDot);
-  
+
 };
 
+//initialize image
+let image = new Image(60, 40);
+image.src = 'logo_dvd.jpg';
+
+//initiate start x,y,dx,dy for image movement
+let x = Math.floor(Math.random()*(c.width - image.width));
+let y = Math.floor(Math.random()*(c.height - image.height));
+let dx = 1;
+let dy = 1.2;
+
 let dvdScreensaver = () => {
+  console.log("playing dvd screensaver");
   console.log(requestID);
-  let image = new Image(60, 40);
-  image.src = 'logo_dvd.jpg';
-  ctx.drawImage(image, 0, 0);
-  if (requestID) {
-    window.cancelAnimationFrame(requestID);
-  }
-  requestID = window.requestAnimationFrame(dvdScreensaver);
+	requestID = window.cancelAnimationFrame(requestID);
+
+	clear();
+	ctx.beginPath();
+	ctx.drawImage(image, x, y, image.width, image.height);
+	if (x < 1 || x >= c.width - image.width) {
+		dx *=-1;
+	}
+	if (y < 1 || y >= c.height - image.height) {
+		dy *=-1;
+	}
+  x +=dx;
+  y +=dy;
+
+	requestID = window.requestAnimationFrame(dvdScreensaver);
 };
 
 //var stopIt = function() {
 var stopIt = () => {
   console.log("stopIt invoked...")
   console.log( requestID );
-
   window.cancelAnimationFrame(requestID);
 };
 
 dotButton.addEventListener( "click", drawDot );
 stopButton.addEventListener( "click",  stopIt );
-dvdButton.addEventListener( "click" , dvdScreensaver );
+dvdButton.addEventListener( "click" , () => {
+  x = Math.floor(Math.random()*(c.width - image.width));
+  y = Math.floor(Math.random()*(c.height - image.height));
+  dx = 1;
+  dy = 1.3;
+  dvdScreensaver() });
