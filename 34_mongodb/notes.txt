@@ -1,0 +1,69 @@
+Thomas Yu
+SoftDev
+K34 -- Another DB Perspective
+2022-04-26
+
+***IT DEPENDS ON YOUR USE CASE
+
+Intro to MongoDB
+- Data model dictates how you develop the application, but not how the application is actually used
+  - Can go from normalized to denormalized data model -> efficiency drops
+  - In MongoDB -> Develop the application first, then define the data model
+    - Data model reflects how it will actually be used
+    - Iterative approach to improve the application and data model
+- Magic Method
+  - Data model defined at application level
+  - Design is part of each phase of application lifetime
+  - What affects data model -> application needs, read and write usage of data
+
+1. Evaluate the Application Workload
+  - Not just current workload but possible future workload also
+  - Gets data size, list of operations ranked by importance
+2. Map out entities an relationships
+  - Collection Relationship Diagram (CRD) -> whether data is linked or embed
+3. Finalize data model for each collection
+- Identify an apply relevant design patterns
+
+Relationships:
+- Can be one to one, one to many, many to many
+Linked Relationships
+- References another entity in the body
+Embedded Relationships
+- Reference the entity in the body
+Example:
+- Linked
+Book = {
+  "_id": 1,
+  "title": Title,
+  "author": 1,
+}
+Author = {
+  "_id": 1,
+  "first": "Alpha",
+  "last": "Beta",
+  "book": 1,
+}
+- Embedded
+Book = {
+"_id": 1,
+"title": Title,
+"author": {
+    "first": "Alpha",
+    "last": "Beta",
+ },
+}
+
+Link vs Embed:
+- How often does the embedded informa tion get accessed?
+- Is the data queried using the embedded info?
+- Does the embedded info change often?
+
+- Can update older design patterns to newer versions
+  - Schema Versioning pattern
+Bucket pattern
+- Store small, related data items
+- reduces index size
+- increases speed of retrieval of related data
+Computed pattern
+- Less work during reads and writes -> saves work already computed
+- Summary records that are updated
