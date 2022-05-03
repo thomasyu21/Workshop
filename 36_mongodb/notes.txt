@@ -1,0 +1,57 @@
+Thomas Yu
+SoftDev
+K36 -- Another DB Perspective
+2022-05-02
+
+MongoDB 101 Chapter 2
+STORING DATA
+Subdocument: document as a value within a document
+JSON (JS Object Notation)
+- Pros: user friendly, readable, familiar
+- Cons: text-based, space-consuming, limited in types
+
+BSON = Binary JSON
+- optimized for speed, space, and flexibility
+- Encoding in binary instead of UTF-8 String
+- More data types than JSON (Date, raw binary)
+- readable by machine only
+
+Data stored by MongoDB in BSON
+ - Can be viwed in JSON format
+
+Interacting with the Atlas Cluster
+Choosing data type -> based on what readability you need (human or machine)
+- Export
+  - BSON: mongodump --uri "<Atlas Cluster URI>"
+  - JSON: mongoexport --uri "<Atlas Cluster URI>"
+                      --collection=<collection name>
+                      --out=<filename>.json
+- Import:
+  - BSON: mongorestore --uri "<Atlas Cluster URI>"
+                       --drop dump
+ - JSON: mongoimport --uri "<Atlas Cluster URI>"
+                     --drop=<filename>.json
+
+URI = Uniform resource identifier
+srv: establishes a secure network
+- Atlas Cluster URI: mongodb+srv://user:password@cluserURI.mongodb.net/database
+- default database name is test
+
+DATA EXPLORER (query in GUI)
+- Namespace = collection name + document name separated by period
+- Find tab = preview of what is in the document (20 at a time)
+Querying: Insert valid JSON query in filter field (find tab)
+
+FIND COMMAND (query in shell)
+mongo "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin" (connect to db)
+show dbs (lists databases in the cluster)
+use <collection name> (indiciate you will be working with specific db)
+show collections (lists collections in db)
+db.<document name>.find( <JSON query> )
+  - shows at max 20 documents
+  - it command to iterates through a cursor (shows next 20 documents)
+    - cursor = pointer to a result set of a query
+      - pointer = direct address to memory location
+.count() operation counts number of documents
+.pretty() operation formats documents to be easier to read
+***No query = just shows any 20 documents from the collection

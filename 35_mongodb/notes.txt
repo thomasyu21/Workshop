@@ -1,0 +1,25 @@
+Thomas Yu
+SoftDev
+K35 -- Another DB Perspective
+2022-05-02
+
+MongoDB 101 Chapter 1
+NoSQL Database
+- No related tables of data
+- Data stored instead as documents
+	- Documents stored in collections
+
+Document: a way to organize and store data as a set of field-value pairs
+	- Like a dictionary
+{
+	<field> : <value>
+}
+Collection: multiple documents (usually with a common field between them)
+Database: multiple collections
+
+Atlas
+- Use to set up database in the cloud
+Clusters: Group of servers
+Replica Set: multiple MongoDB instances that store the same data (redundant data)
+Instance: single machine (locally or in the cloud) running a certain software
+- If one instance fails, the data will still be maintained by the other instance
