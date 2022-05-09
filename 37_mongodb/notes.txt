@@ -1,0 +1,65 @@
+Thomas Yu
+SoftDev
+K37 -- Another DB Perspective 
+2022-05-04
+
+MongoDB 101 Chapter 3
+Can create/insert a new document from Atlas UI
+_id = mandatory unique identifier for a document in a collection
+	- By default uses ObjectId()
+	
+MONGO SHELL INSERT
+mongoimport --uri="mongodb+srv://<username>:<password>@<cluster>.mongodb.net/sample_supplies" --drop sales.json
+	- drop removes collection before inserting
+		- will get rid of any duplicate key issues
+Connect to Atlas, find db to use, insert document
+db.inspections.insert({
+      "_id" : ObjectId("56d61033a378eccde8a8354f"),
+      "id" : "10021-2015-ENFO",
+      "certificate_number" : 9278806,
+      "business_name" : "ATLIXCO DELI GROCERY INC.",
+      "date" : "Feb 20 2015",
+      "result" : "No Violation Issued",
+      "sector" : "Cigarette Retail Dealer - 127",
+      "address" : {
+              "city" : "RIDGEWOOD",
+              "zip" : 11385,
+              "street" : "MENAHAN ST",
+              "number" : 1712
+         }
+  })
+
+db.inspections.find({"id" : "10021-2015-ENFO", "certificate_number" : 9278806}).pretty()
+
+Can remove _id value (MongoDB will generate the field with ObjectId() as a value)
+	- Can have two identical documents aside from _id
+
+MULTIPLE DOCUMENTS
+db.inspections.insert([ { "test": 1 }, { "test": 2 }, { "test": 3 } ])
+	- [] to say you want to insert multiple documents
+	- By default inserted in order of array
+		- Any errors (like ones caused by a duplicate _id) will stop the documents after it to be inserted
+			- Only inserts the first document
+		- Can be avoided with {"ordered": false} after the ]
+			- db.inspections.insert([{ "_id": 1, "test": 1 },{ "_id": 1, "test": 2 },
+                       { "_id": 3, "test": 3 }],{ "ordered": false })
+                       - Will insert only the documents with unique _id
+                       - Doesn't insert 1st or 2nd
+Inserting documents into a collection that doesn't exist
+	- MongoDB will create it for you
+	
+updateOne() = Alters the first document found matching a criteria
+updateMany() = Alters all documents matching a criteria
+
+updateMany(<query>,<update to happen>)
+update: {"$inc": {"pop":10, "<field2>":<increment value>, ...}}
+	-$inc = update operator that increments the value of the field by a specified amount
+	-$set = operator that updates value of a field
+		-Will create the field if it doesn't exist
+	-$push = operator to add a field:value pair to the document
+
+DELETING DOCUMENTS AND COLLECTIONS
+deleteOne() -> should only use when query is _id
+deleteMany()
+-drop used to delete a collection (db.collection.drop())
+
