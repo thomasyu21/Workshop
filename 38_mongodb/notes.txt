@@ -1,0 +1,87 @@
+Thomas Yu
+SoftDev
+K38 -- Another DB Perspective
+2022-05-08
+
+MongoDB 101 Chapter 4
+MQL COMPARISON OPERATORS
+$eq = equal to
+$ne = not equal to
+$gt = greater than
+$lt = less than
+$gte = greater than or equal to
+$lte = less than or equal to
+{<field>: {<operator>:<value>}}
+
+db.trips.find({ "tripduration": { "$lte" : 70 },
+                "usertype": { "$eq": "Customer" }}).pretty()
+db.trips.find({ "tripduration": { "$lte" : 70 },
+                "usertype": "Customer" }).pretty()
+$eq is default operator
+
+LOGIC OPERATORS
+$and (match all queries)
+$or (match one of the queries)
+$nor (doesn't match either given clause)
+{<operator>:[{statement1},{statement2},...]}
+
+$not (negates query requirement)
+{$not: {statement}}
+
+db.routes.find({ "$and": [ { "$or" :[ { "dst_airport": "KZN" },
+                                    { "src_airport": "KZN" }
+                                  ] },
+                          { "$or" :[ { "airplane": "CR2" },
+                                     { "airplane": "A81" } ] }
+                         ]}).pretty()
+$and is the default operator
+{sector:"Mobile Food Vendor - 881", result:"Warning"}
+{"student_id": {"$gt":25m "$lt":100}}
+Use $and explicitly when you are using another operator multiple times
+
+db.companies.find({ "$and": [ { "$or" :[ { "dst_airport": "KZN" },
+                                    { "src_airport": "KZN" }
+                                  ] },
+                          { "$or" :[ { "airplane": "CR2" },
+                                     { "airplane": "A81" } ] }
+
+EXPRESSIVE QUERY OPERATOR
+$expr = allows use of aggregation expressions
+{ $expr: {<expression>} }
+-allows the use of variables and conditional statements
+
+$
+-denote the use of an operator
+-addresses the field value
+
+db.trips.find({ "$expr": { "$and": [ { "$gt": [ "$tripduration", 1200 ]},
+                         { "$eq": [ "$end station id", "$start station id" ]}
+                       ]}}).count()
+
+Aggregation Syntax: { <operator>: {<field>,<value>} }
+
+ARRAY OPERATORS
+$push -> add an element to an array or add an array field to the document
+Order of array elements matter!
+
+$all -> returns all documents with at least the specified array queries
+$size -> limits length of array field
+
+ARRAY OPERATORS AND PROJECTION
+projection -> decide which document fields will be displayed
+-find({queries}, {projection}})
+-projection = <field>: <1/0> (1 = include, 0 = exclude)
+	-can't mix and match 1's and 0's unless 0 is used to exclude _id (shown by default)
+
+$elemMatch -> match documents that contain the element in its array
+
+ARRAY OPERATORS AND SUB DOCUMENTS
+"field1.otherfield": "value"
+-access a field in a subdocument
+-can chain (field1.field2.field3.field4....)
+
+db.companies.find({ "relationships.0.person.last_name": "Zuckerberg" },
+                  { "name": 1 }).pretty()
+-0 = position of value in array
+
+$regex -> specify string you are trying to match
