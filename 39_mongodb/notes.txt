@@ -1,0 +1,53 @@
+Thomas Yu
+SoftDev
+K39 -- Another DB Perspective
+2022-05-11
+
+MongoDB 101 Chapter 5
+AGGREGATION FRAMEWORK (another way to query)
+aggregate() instead of find()
+-may want to group data or modify in someway rather than just finding
+-order of actions matters
+$match and $project
+
+db.listingsAndReviews.aggregate([
+                                 { "$match": { "amenities": "Wifi" } },
+                                 { "$project": { "price": 1,
+                                                 "address": 1,
+                                                 "_id": 0 }}]).pretty()
+
+Stages
+$group stage -> compute and reshape data
+{ $group: 
+	{_id: "$<value to group by>",
+	 <field1>: {<accumulator1>:<expression1>},
+	 ...} }
+"count":{"$sum":1}
+
+SORT AND LIMIT
+sort({<field>:1})
+1 = ascending order
+-1 = descending order
+
+limit(<num>)
+number = number of documents
+
+cursor.limit().sort() and cursor.sort().limit() are the same (sort first then limit)
+
+INDEXES
+Special data structure that optimizes queries
+createIndex({<field>:1})
+1 for ascending, 2 for descending
+-can also be used as a reference for sorting
+Compound index just uses multiple fields
+-orders based on first field then the second field
+
+DATA ORGANIZING: a way to organize fields in a document to support your application performance and querying capabilities
+-data stored in the way it is used
+-evolving an application implies evolving a data model
+
+UPSERT (hybrid of update and insert)
+-updates if finds a match, inserts otherwise
+-false by default
+updateOne({query},{<update>})
+updateOne({query},{<update>},{"upsert":true})
